@@ -40,8 +40,8 @@ $mui-mui-text-styles: (
     "alpha-black": 0.54,
     "alpha-white": 0.70,
     "alpha-accent": 0.54,
-    "line-height": 112px,
-    "letter-spacing": -0.01em
+    "line-height": 128px,
+    "letter-spacing": -5px
   ),
   "display3": (
     "font-weight": 400,
@@ -49,8 +49,8 @@ $mui-mui-text-styles: (
     "alpha-black": 0.54,
     "alpha-white": 0.70,
     "alpha-accent": 0.54,
-    "line-height": 56px,
-    "letter-spacing": -0.005em
+    "line-height": 64px,
+    "letter-spacing": 0
   ),
   "display2": (
     "font-weight": 400,
@@ -58,8 +58,8 @@ $mui-mui-text-styles: (
     "alpha-black": 0.54,
     "alpha-white": 0.70,
     "alpha-accent": 0.54,
-    "line-height": 48px,
-    "letter-spacing": 0em
+    "line-height": 64px,
+    "letter-spacing": 0
   ),
   "display1": (
     "font-weight": 400,
@@ -67,8 +67,8 @@ $mui-mui-text-styles: (
     "alpha-black": 0.54,
     "alpha-white": 0.70,
     "alpha-accent": 0.54,
-    "line-height": 40px,
-    "letter-spacing": 0em
+    "line-height": 52px,
+    "letter-spacing": 0
   ),
   "headline": (
     "font-weight": 400,
@@ -76,17 +76,17 @@ $mui-mui-text-styles: (
     "alpha-black": 0.87,
     "alpha-white": 1.00,
     "alpha-accent": 0.87,
-    "line-height": 32px,
-    "letter-spacing": 0em
+    "line-height": 44px,
+    "letter-spacing": 0
   ),
   "title": (
-    "font-weight": 400,
+    "font-weight": 600,
     "font-size": 20px,
     "alpha-black": 0.87,
     "alpha-white": 1.00,
     "alpha-accent": 0.87,
-    "line-height": 28px,
-    "letter-spacing": 0.005em
+    "line-height": 44px,
+    "letter-spacing": 0
   ),
   "subhead": (
     "font-weight": 400,
@@ -94,17 +94,17 @@ $mui-mui-text-styles: (
     "alpha-black": 0.87,
     "alpha-white": 1.00,
     "alpha-accent": 0.87,
-    "line-height": 24px,
-    "letter-spacing": 0.001em
+    "line-height": 32px,
+    "letter-spacing": 0
   ),
   "body2": (
-    "font-weight": 500,
+    "font-weight": 600,
     "font-size": 14px,
     "alpha-black": 0.87,
     "alpha-white": 1.00,
     "alpha-accent": 0.87,
     "line-height": 24px,
-    "letter-spacing": 0.001em
+    "letter-spacing": 0
   ),
   "body1": (
     "font-weight": 400,
@@ -112,8 +112,8 @@ $mui-mui-text-styles: (
     "alpha-black": 0.87,
     "alpha-white": 1.00,
     "alpha-accent": 0.87,
-    "line-height": 20px,
-    "letter-spacing": 0.001em
+    "line-height": 24px,
+    "letter-spacing": 0
   ),
   "caption": (
     "font-weight": 400,
@@ -121,25 +121,25 @@ $mui-mui-text-styles: (
     "alpha-black": 0.54,
     "alpha-white": 0.70,
     "alpha-accent": 0.54,
-    "line-height": 16px,
-    "letter-spacing": 0.002em
+    "line-height": 32px,
+    "letter-spacing": 0
   ),
   "menu": (
-    "font-weight": 500,
-    "font-size": 13px,
-    "alpha-black": 0.87,
-    "alpha-white": 1.00,
-    "alpha-accent": 0.87,
-    "line-height": 17px,
-    "letter-spacing": 0.001em
-  ),
-  "button": (
-    "font-weight": 400,
+    "font-weight": 600,
     "font-size": 14px,
     "alpha-black": 0.87,
     "alpha-white": 1.00,
     "alpha-accent": 0.87,
-    "line-height": 18px,
-    "letter-spacing": 0.05em
+    "line-height": 32px,
+    "letter-spacing": 0
+  ),
+  "button": (
+    "font-weight": 600,
+    "font-size": 14px,
+    "alpha-black": 0.87,
+    "alpha-white": 1.00,
+    "alpha-accent": 0.87,
+    "line-height": 32px,
+    "letter-spacing": 0
   )
 );
