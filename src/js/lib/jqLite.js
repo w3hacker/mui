@@ -263,6 +263,53 @@ function jqLiteRemoveClass(element, cssClasses) {
 }
 
 
+/**
+ * Execute all handlers attached to an element for an event.
+ * @param {Element} element - The DOM element.
+ * @param {string} eventName - The event name.
+ * @param {Object} extraParameters - Arguments for handlers.
+ */
+function jqLiteTriggerHandler(element, eventName, extraParameters) {
+  var dummyEvent, eventFnsCopy, handlerArgs, i, m;
+
+  var eventCache = element._muiEventCache || {},
+      eventFns = eventCache[eventName];
+
+  if (eventFns && eventFns.length) {
+    dummyEvent = {
+      preventDefault: function() {
+        this.defaultPrevented = true;
+      },
+      isDefaultPrevented: function() {
+        return this.defaultPrevented === true;
+      },
+      stopImmediatePropagation: function() {
+        this.immediatePropagationStopped = true;
+      },
+      isImmediatePropagationStopped: function() {
+        return this.immediatePropagationStopped === true;
+      },
+      stopPropagation: _noop,
+      type: eventName,
+      target: element
+    };
+
+    // copy events list
+    eventFnsCopy = eventFns.slice();
+    handlerArgs = extraParameters ? [dummyEvent].concat(extraParameters) :
+      [dummyEvent];
+
+    // execute callbacks
+    m = eventFnsCopy.length;
+    for (i=0; i < m; i++) {
+      if (!dummyEvent.isImmediatePropagationStopped()) {
+        eventFnsCopy[i][0].apply(element, handlerArgs);
+      }
+    }
+  }
+}
+
+
 // ------------------------------
 // Utilities
 // ------------------------------
@@ -281,6 +328,10 @@ BOOLEAN_ATTRS = {
   required: true,
   open: true
 }
+
+
+function _noop() {
+};
 
 
 function _getExistingClasses(element) {
@@ -347,6 +398,9 @@ module.exports = {
   /** Remove classes */
   removeClass: jqLiteRemoveClass,
 
+  /** Trigger event on elemement */
+  triggerHandler: jqLiteTriggerHandler,
+  
   /** Check JavaScript variable instance type */
   type: jqLiteType
 };

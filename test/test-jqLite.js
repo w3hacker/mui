@@ -8,6 +8,7 @@ describe('js/lib/jqLite.js', function() {
   before(function() {
     jqLite = require('../src/js/lib/jqLite.js');
   });
+
   
   // ----------------------
   // class methods
@@ -43,6 +44,7 @@ describe('js/lib/jqLite.js', function() {
     });
   });
 
+  
   // --------------------
   // event handlers
   // --------------------
@@ -106,7 +108,72 @@ describe('js/lib/jqLite.js', function() {
       assert.equal(trigger2, false);
     });
   });
+      
 
+  // --------------------
+  // triggerHandler
+  // --------------------
+  describe('triggerHandler', function() {
+    var el;
+
+    beforeEach(function() {
+      el = document.createElement('div');
+    });
+
+    it('should trigger multiple events', function() {
+      var trigger1 = false,
+          trigger2 = false;
+
+      function fn1() {trigger1 = true;};
+      function fn2() {trigger2 = true;};
+
+      // add both
+      jqLite.on(el, 'customEvent', fn1);
+      jqLite.on(el, 'customEvent', fn2);
+      
+      // trigger with triggerHandler
+      jqLite.triggerHandler(el, 'customEvent');
+      assert.equal(trigger1, true);
+      assert.equal(trigger2, true);      
+    });
+
+    it('should stop propagation', function() {
+      var trigger1 = false,
+          trigger2 = false;
+
+      function fn1(ev) {
+        ev.stopImmediatePropagation();
+        trigger1 = true;
+      };
+
+      function fn2() {
+        trigger2 = true;
+      };
+
+      // add both
+      jqLite.on(el, 'customEvent', fn1);
+      jqLite.on(el, 'customEvent', fn2);
+      
+      // trigger with triggerHandler
+      jqLite.triggerHandler(el, 'customEvent');
+      assert.equal(trigger1, true);
+      assert.equal(trigger2, false);
+    });
+
+    it('should pass arguments', function() {
+      var extraArgs = {a: 1},
+          testArgs;
+
+      function fn(ev, args) {testArgs = args;};
+      jqLite.on(el, 'customEvent', fn);
+      
+      // trigger with triggerHandler
+      jqLite.triggerHandler(el, 'customEvent', extraArgs);
+      assert.equal(testArgs, extraArgs);
+    });
+  });
+
+  
   // --------------------
   // css helper
   // --------------------
