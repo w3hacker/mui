@@ -97,9 +97,33 @@ function animationHandlerFn(ev) {
 
 
 /**
+ * Dispatch custom event
+ * @param {string} eventName - The event name.
+ */
+function dispatchEvent(element, eventName) {
+  var eventObj;
+  
+  if (document.createEventObject) {
+    // dispatch for IE
+    eventObj = document.createEventObject();
+    return element.fireEvent('on' + eventName, eventObj);
+
+  } else {
+    eventObj = document.createEvent("HTMLEvents");
+    eventObj.initEvent(eventName, true, true);
+    return element.dispatchEvent(eventObj);
+
+  }
+}
+
+
+/**
  * Define the module API
  */
 module.exports = {
+  /** Dispatch custom events */
+  dispatchEvent: dispatchEvent,
+  
   /** Log messages to the console when debug is turned on */
   log: logFn,
 

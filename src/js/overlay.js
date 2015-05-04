@@ -10,7 +10,9 @@ var util = require('./lib/util.js'),
     jqLite = require('./lib/jqLite.js'),
     bodyClass = 'mui-overlay-on',
     overlayId = 'mui-overlay',
-    iosRegex = /(iPad|iPhone|iPod)/g;
+    iosRegex = /(iPad|iPhone|iPod)/g,
+    eventNameOn = 'mui.overlay.on',
+    eventNameOff = 'mui.overlay.off';
 
 
 /**
@@ -19,7 +21,6 @@ var util = require('./lib/util.js'),
  * @param {object} [options]
  * @config {boolean} [keyboard] - If true, close when escape key is pressed.
  * @config {boolean} [static] - If false, close when backdrop is clicked.
- * @config {Function} [onclose] - Callback function to execute on close
  * @param {Element} [childElement] - Child element to add to overlay.
  */
 function overlayFn(action) {
@@ -32,28 +33,25 @@ function overlayFn(action) {
     // pull options and childElement from arguments
     for (var i=arguments.length - 1; i > 0; i--) {
       arg = arguments[i];
-
+      
       if (jqLite.type(arg) === 'object') options = arg;
       if (arg instanceof Element && arg.nodeType === 1) childElement = arg;
     }
-
+    
     // option defaults
     options = options || {};
     if (options.keyboard === undefined) options.keyboard = true;
     if (options.static === undefined) options.static = false;
-    
-    // execute method
-    overlayEl = overlayOn(options, childElement);
-    
-  } else if (action === 'off') {
-    overlayEl = overlayOff();
 
+    overlayOn(options, childElement);
+
+  } else if (action === 'off') {
+    overlayOff();
+    
   } else {
     // raise error
     util.raiseError("Expecting 'on' or 'off'");
   }
-
-  return overlayEl;
 }
 
 
@@ -63,6 +61,9 @@ function overlayFn(action) {
  * @param {Element} childElement - The child element.
  */
 function overlayOn(options, childElement) {
+  // dispatch event
+  if (util.dispatchEvent(document, eventNameOn) === false) return;
+
   var bodyEl = document.body,
       overlayEl = document.getElementById(overlayId);
     
@@ -110,30 +111,24 @@ function overlayOn(options, childElement) {
  * Turn off overlay.
  */
 function overlayOff() {
-  var overlayEl = document.getElementById(overlayId),
-      callbackFn;
+  // dispatch event
+  if (util.dispatchEvent(document, eventNameOff) === false) return;
 
+  var overlayEl = document.getElementById(overlayId);
+  
   if (overlayEl) {
     // remove children
     while (overlayEl.firstChild) overlayEl.removeChild(overlayEl.firstChild);
-
+    
     // remove overlay element
     overlayEl.parentNode.removeChild(overlayEl);
-
-    // callback reference
-    callbackFn = overlayEl.muiOptions.onclose;
   }
-
+  
   jqLite.removeClass(document.body, bodyClass);
-
+  
   // remove option handlers
   removeKeyupHandler();
   removeClickHandler(overlayEl);
-
-  // execute callback
-  if (callbackFn) callbackFn();
-
-  return overlayEl;
 }
 
 

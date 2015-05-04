@@ -19,6 +19,7 @@ describe('js/lib/util.js', function() {
     el.parentNode.removeChild(el);
   });
 
+  
   // ----------------------
   // loadStyle
   // ----------------------
@@ -31,4 +32,10 @@ describe('js/lib/util.js', function() {
     var css = getComputedStyle(el);
     assert.equal(css.getPropertyValue('color'), 'rgb(255, 0, 0)');
   });
+
+
+  // ---------------------
+  // dispatchEvent
+  // ---------------------
+  
 });

@@ -4,6 +4,16 @@
     <link rel="stylesheet" type="text/css" href="assets/mui/css/mui.css"/>
     <script src="assets/mui/js/mui.js"></script>
     <script>
+      // add event listeners
+      document.addEventListener('mui.overlay.on', function(ev) {
+        console.log('on event');
+      });
+      
+      document.addEventListener('mui.overlay.off', function(ev) {
+        console.log('off event');
+      });
+    </script>
+    <script>
       window.addEventListener('load', function() {
         var buttonEl = document.getElementsByClassName('mui-btn')[0];
 
@@ -14,8 +24,7 @@
           modalEl.style.margin = '30px auto';
           modalEl.style.backgroundColor = '#fff';
 
-          var options = {onclose: function() {console.log('onclose');}};
-          mui.overlay('on', options, modalEl);
+          mui.overlay('on', modalEl);
         });
       });
     </script>

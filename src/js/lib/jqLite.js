@@ -171,7 +171,7 @@ function jqLiteOne(element, type, callback, useCapture) {
   });
 
   // add listener
-  jqLiteOn(element, type, fn);
+  jqLiteOn(element, type, callback, useCapture);
 }
 
 
@@ -264,7 +264,7 @@ function jqLiteRemoveClass(element, cssClasses) {
 
 
 /**
- * Execute all handlers attached to an element for an event.
+ * Execute event handlers attached with jqLite.
  * @param {Element} element - The DOM element.
  * @param {string} eventName - The event name.
  * @param {Object} extraParameters - Arguments for handlers.
